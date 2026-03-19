@@ -16,5 +16,9 @@ const app = new Hono<{
 app.route("/api/v1/user", userRouter);
 app.route("/api/v1/blog", blogRouter);
 
+app.get("/", async (c) => {
+  c.text("Hello from hono");
+});
+
 export default app;
 //for deploy useing vkgupta9529@gmail.com
