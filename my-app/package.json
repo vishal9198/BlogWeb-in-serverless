@@ -10,9 +10,11 @@
     "@prisma/adapter-pg": "^7.5.0",
     "@prisma/client": "^7.5.0",
     "@prisma/extension-accelerate": "^3.0.1",
+    "@vishal_1408/medium-common": "^1.0.0",
     "dotenv": "^17.3.1",
     "hono": "^4.12.8",
-    "pg": "^8.20.0"
+    "pg": "^8.20.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/pg": "^8.18.0",

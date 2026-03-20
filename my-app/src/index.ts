@@ -17,7 +17,7 @@ app.route("/api/v1/user", userRouter);
 app.route("/api/v1/blog", blogRouter);
 
 app.get("/", async (c) => {
-  c.text("Hello from hono");
+  return c.text("Hello from hono");
 });
 
 export default app;

@@ -4,7 +4,8 @@ import { Hono } from "hono";
 import { PrismaClient } from "../../generated/prisma";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { sign, verify } from "hono/jwt";
-
+import { createBlog, updateBlog } from "@vishal_1408/medium-common";
+import { safeParse } from "zod";
 export const blogRouter = new Hono<{
   Bindings: {
     DATABASE_URL: string;
@@ -40,6 +41,15 @@ blogRouter.post("/", async (c) => {
 
     const body = await c.req.json();
 
+    const { success } = createBlog.safeParse(body);
+
+    if (!success) {
+      c.status(411);
+      return c.json({
+        msg: "body format of create blog is wrong",
+      });
+    }
+
     const blog = await prisma.blog.create({
       data: {
         title: body.title,
@@ -64,6 +74,15 @@ blogRouter.put("/", async (c) => {
     }).$extends(withAccelerate());
 
     const body = await c.req.json();
+
+    const { success } = updateBlog.safeParse(body);
+
+    if (!success) {
+      c.status(411);
+      return c.json({
+        msg: "body format of updateblog is wrong",
+      });
+    }
 
     const blog = await prisma.blog.update({
       where: {
